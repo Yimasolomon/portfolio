@@ -26,3 +26,39 @@ nav a:hover {
     padding: 1rem 1.5rem;
     margin: 1rem 2rem;
 }
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    background: var(--navy);
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+:root {
+    --navy: #1e293b;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    background: var(--navy);
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

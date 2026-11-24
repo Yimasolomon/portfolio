@@ -6,8 +6,15 @@ projects = [
     {
         "title": "Deliveries",
         "description": "A delivery tracking dashboard",
-        "tech": ["python", "SQLite", "Alchemy", "Alembic"],
+        "tech": ["Python", "SQLite", "SQLAlchemy", "Alembic"],
         "link": "https://github.com/Yimasolomon/Deliveries"
+    },
+
+    {
+        "title": "CampusFlow-Joe-Yima",
+        "description": "CampusFlow is a Python-based helpdesk ticket management system that helps teams create, assign, track, and resolve support requests. It features ticket prioritization, status management, search and filtering, reporting, and persistent JSON storage, with input validation to maintain reliable ticket records.",
+        "tech": ["Python", "JSON", "unittest", "Git", "GitHub", "CLI"],
+        "link": "https://github.com/Yimasolomon/CampusFlow-Joe-Yima"
     }
 ]
 
