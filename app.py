@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -26,9 +26,23 @@ def home():
 def about():
     return render_template("about.html")
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html")
+    error = None
+    success = False
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        message = request.form.get("message", "").strip()
+
+        if not name or not email or not message:
+            error = "Please fill in all fields."
+        else:
+            print(f"New message from {name} ({email}): {message}")
+            success = True
+    
+    return render_template("contact.html", success=success)
 
 @app.route("/projects")
 def projects_page():
