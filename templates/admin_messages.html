@@ -1,0 +1,19 @@
+{% extends base.thml %}
+
+{% block title}Messages{% endblock %}
+
+{% block content %}
+    <h1>Messages</h1>
+
+    {% if Messages %}
+        {% for m in Messages %}
+            <div class="card">
+                <h2>{{ m.name }}</h2>
+                <p>{{ m.email }} . {{ m.created_at }}</p>
+                <p>{{ m.message }}</p>
+            </div>
+        {% enfor %}
+    {% else %}
+        <p>No messages yet.</p>
+    {% endif %}
+{% endblock %}

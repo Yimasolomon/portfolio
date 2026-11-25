@@ -1,8 +1,27 @@
 from flask import Flask, render_template, request
+import sqlite3
+import os
+import secrets
+from flask import Response
 
 app = Flask(__name__)
 
-import sqlite3
+def check_auth():
+    password = os.environ.get("ADMIN_PASSWORD")
+    auth = request.authorization
+    if not password or not auth is None:
+        return False
+    return secrets.compare_digest(auth.password, password)
+
+@app.route("/admin/messages")
+def admin_messages():
+    if not check_auth():
+        return Response(
+            "Login required", 401,
+            {"WWW-Authenticate": 'Basic realm="Admin"'},
+        )
+    return render_template("admin_messages.html", messages=get_messages())
+
 
 DB_PATH =  "messages.db"
 
@@ -65,6 +84,15 @@ def contact():
             save_message(name, email, message)
             success = True
     
+def get_messages():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT id, name, email, message, created_at "
+            "FROM messages ORDER BY id DESC"
+        ).fetchall()
+    return rows
+
     return render_template("contact.html", error=error, success=success)
 
 @app.route("/projects")
